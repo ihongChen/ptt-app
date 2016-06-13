@@ -1,10 +1,80 @@
 <!DOCTYPE html>
-<html>
-<body>
+<html ng-app="pttDataApp">
+<head>
+	<meta charset="UTF-8">
+    <title>Title</title>
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 
-<h1>My First Heading</h1>
+	<style>
+    table, th , td  {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+    table tr:nth-child(odd)	{
+        background-color: #f1f1f1;
+    }
+    table tr:nth-child(even) {
+        background-color: #ffffff;
+    }
+</style>
+</head>
+<body ng-controller="MainCtrl">
 
-<p>My first paragraph.</p>
+<h1>PTT 熱門文章</h1>
+
+搜尋最近天數：<input type="text" ng-model="day">
+筆數：<input type="text" ng-model="limit">
+<button ng-click="getArticles(day, limit)">搜尋</button>
+<br/><br/><br/>
+
+<table class="table">
+    <tr>
+        <th></th>
+        <th>發文日期</th>
+        <th>推文數</th>
+        <th>標題</th>
+        <th>連結</th>
+    </tr>
+    <tr ng-repeat="item in articles">
+        <td>{{ $index + 1 }}</td>
+        <td>{{item["發文日期"]}}</td>
+        <td>{{item["推文數"]}}</td>
+        <td>{{item["標題"]}}</td>
+        <td><a href='{{item["連結"]}}' target="_blank">{{item["連結"]}}</a></td>
+    </tr>
+    <tr>
+        <th></th>
+        <th>發文日期</th>
+        <th>推文數</th>
+        <th>標題</th>
+        <th>連結</th>
+    </tr>
+</table>
+
+<script>
+    var app = angular.module("pttDataApp", []);
+
+    function MainCtrl($scope, $http) {
+
+        $scope.day = "7";
+        $scope.limit = "20";
+        var hostUrl = "http://localhost:3000/article";
+
+        $scope.getArticles = function(day, limit) {
+            $http
+                    .get(hostUrl+'?day='+day+'&limit='+limit)
+                    .success(function(result) {
+                        console.log("result:"+JSON.stringify(result));
+                        $scope.articles = result;
+                    });
+        };
+
+        $scope.getArticles($scope.day, $scope.limit);
+    }
+
+ </script>
 
 </body>
 </html>
