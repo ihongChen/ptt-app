@@ -35,21 +35,14 @@
         <th>發文日期</th>
         <th>推文數</th>
         <th>標題</th>
-        <th>連結</th>
+        <!-- <th>連結</th> -->
     </tr>
     <tr ng-repeat="item in articles">
         <td>{{ $index + 1 }}</td>
         <td>{{item["發文日期"]}}</td>
         <td>{{item["推文數"]}}</td>
-        <td>{{item["標題"]}}</td>
-        <td><a href='{{item["連結"]}}' target="_blank">{{item["連結"]}}</a></td>
-    </tr>
-    <tr>
-        <th></th>
-        <th>發文日期</th>
-        <th>推文數</th>
-        <th>標題</th>
-        <th>連結</th>
+        <td><a href='{{item["連結"]}}' target="_blank">{{item["標題"]}}</a></td>
+        <!-- <td><a href='{{item["連結"]}}' target="_blank">{{item["連結"]}}</a></td> -->
     </tr>
 </table>
 

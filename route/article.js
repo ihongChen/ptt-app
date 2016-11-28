@@ -25,10 +25,9 @@ function getList(req, res) {
         res.end();
       });
     }else{
-      console.log('not valid query,should be: \n/article?getDays=xx&getArticleNumbers=xx');
-      res.send('not valid query,should be: \n/article?getDays=xx&getArticleNumbers=xx');
+      console.log('not valid query,should be: /article?day=xx&limit=xx');
+      res.send('not valid query,should be: /article?day=xx&limit=xx');
       res.end();
     }
 
 }
-
